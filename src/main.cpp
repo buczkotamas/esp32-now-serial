@@ -14,8 +14,7 @@ void OnDataRecv(const uint8_t *mac, const uint8_t *data, int len)
 
 void consumer_loop(void *pvParameters)
 {
-  Serial.print("consumer_loop executing on core ");
-  Serial.println(xPortGetCoreID());
+  Serial.printf("Serial publisher executing on core %d\n", xPortGetCoreID());
   char data[250];
   char mac[6];
   while (true)
@@ -59,8 +58,7 @@ void setup()
     return;
   }
   esp_now_register_recv_cb(OnDataRecv);
-  Serial.print("Setup: Executing on core ");
-  Serial.println(xPortGetCoreID());
+  Serial.printf("ESP-NOW Listener executing on core %d\n", xPortGetCoreID());
   Serial.println("ESP32 NOW->UART started.");
 }
 
